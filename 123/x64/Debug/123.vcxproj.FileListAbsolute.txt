@@ -1,2 +1,0 @@
-C:\Users\vadim\source\repos\123\123\x64\Debug\123.vcxproj.AssemblyReference.cache
-C:\Users\vadim\source\repos\123\123\x64\Debug\123.vcxproj.SuggestedBindingRedirects.cache
