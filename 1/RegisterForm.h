@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <Windows.h>
+#include <direct.h>
 #pragma once
 
 namespace  My1 {
@@ -202,10 +207,44 @@ namespace  My1 {
 		this->Close();
 	}
 	private: System::Void btRegister_Click(System::Object^ sender, System::EventArgs^ e) {
-		/*
-			std::ifstream infile("User.txt"); //відкрити файл для читання
-		std::ofstream outfile("User.txt", std::ios::app); //занести в файл*/
+		RegBoxLogin = System::Convert::ToString(tbLogin->Text);
+		RegBoxPassword = System::Convert::ToString(tbPassword->Text);
+		RegBoxPassword = System::Convert::ToString(tbConfigPassword->Text);
+		char* temp_path = getenv("TEMP");
+		char* folder_path = "\\Test\\Database";
+		char file_name[255];
 
+		sprintf(file_name, "%s%s", temp_path, folder_path);
+
+		int result = mkdir(file_name);
+
+		sprintf(file_name, "%s\\%s.bin", file_name, RegBoxUsername);
+
+		char Usernamechar[64];
+		sprintf(Usernamechar, "Login: %s", tbLogin->Text);
+		char Passwordchar[128];
+		sprintf(Passwordchar, "\nPassword: %s", tbPassword->Text);
+
+
+		Registration registration;
+		strcpy(registration.login, Usernamechar);
+		strcpy(registration.password, Passwordchar);
+
+		FILE* fp = fopen(file_name, "rb");
+		if (fp == NULL) {
+			fp = fopen(file_name, "wb");
+			if (fp == NULL) {
+				System::String^ temp_path_str = gcnew System::String(file_name);
+				System::Windows::Forms::MessageBox::Show(temp_path_str, "Помилка", System::Windows::Forms::MessageBoxButtons::OK, System::Windows::Forms::MessageBoxIcon::Error);
+			}
+			else {
+				fwrite(&registration, sizeof(Registration), 1, fp);
+				fclose(fp);
+
+			}
+		}
+
+		this->Close();
 	}
 	};
 }

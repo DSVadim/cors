@@ -49,8 +49,9 @@ namespace My1 {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::TextBox^ tbUsername;
+	private: System::Windows::Forms::TextBox^ tblPassword;
 
-	private: System::Windows::Forms::TextBox^ tbPassword;
+
 	private: System::Windows::Forms::Button^ btOK;
 	private: System::Windows::Forms::Label^ label4;
 
@@ -77,7 +78,7 @@ namespace My1 {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->tbUsername = (gcnew System::Windows::Forms::TextBox());
-			this->tbPassword = (gcnew System::Windows::Forms::TextBox());
+			this->tblPassword = (gcnew System::Windows::Forms::TextBox());
 			this->btOK = (gcnew System::Windows::Forms::Button());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
@@ -124,12 +125,12 @@ namespace My1 {
 			this->tbUsername->Size = System::Drawing::Size(281, 31);
 			this->tbUsername->TabIndex = 2;
 			// 
-			// tbPassword
+			// tblPassword
 			// 
-			this->tbPassword->Location = System::Drawing::Point(21, 165);
-			this->tbPassword->Name = L"tbPassword";
-			this->tbPassword->Size = System::Drawing::Size(281, 31);
-			this->tbPassword->TabIndex = 2;
+			this->tblPassword->Location = System::Drawing::Point(21, 165);
+			this->tblPassword->Name = L"tblPassword";
+			this->tblPassword->Size = System::Drawing::Size(281, 31);
+			this->tblPassword->TabIndex = 2;
 			// 
 			// btOK
 			// 
@@ -163,7 +164,7 @@ namespace My1 {
 			this->ClientSize = System::Drawing::Size(315, 284);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->btOK);
-			this->Controls->Add(this->tbPassword);
+			this->Controls->Add(this->tblPassword);
 			this->Controls->Add(this->tbUsername);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
@@ -180,9 +181,37 @@ namespace My1 {
 		}
 #pragma endregion
 	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		CreateAdmin();
+		char* temp_path = getenv("TEMP");
+		char file_name[255];
+
+		sprintf(file_name, "%s\\Testify", temp_path);
+
+		int result = mkdir(file_name);
+
+		char* folder_path2 = "\\Testify\\Current info";
+		char file_name2[255];
+
+		sprintf(file_name2, "%s%s", temp_path, folder_path2);
+		int result2 = mkdir(file_name2);
+
+		char* folder_path_result = "\\Testify\\Result";
+		char file_name3[255];
+
+		sprintf(file_name3, "%s%s", temp_path, folder_path_result);
+		int result3 = mkdir(file_name3);
+
+		char* folder_path_questions = "\\Testify\\Questions";
+
+		sprintf(file_name3, "%s%s", temp_path, folder_path_questions);
+		result3 = mkdir(file_name3);
+
+		char* folder_path_answers = "\\Testify\\Questions Answers";
+
+		sprintf(file_name3, "%s%s", temp_path, folder_path_questions);
+		result3 = mkdir(file_name3);
 
 	}
-
 	private: System::Void btOK_Click(System::Object^ sender, System::EventArgs^ e) {
 
 	}
